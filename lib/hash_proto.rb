@@ -9,7 +9,9 @@ class MyHash
   #emulate Hash#store
   define_method(:store) do |key, value|
     kp = KeyPair.new(key, value)
-    @hash.push(kp)
+    if self.has_key?(key) == false
+      @hash.push(kp)
+    end
   end
 
   #emulate Hash#fetch
