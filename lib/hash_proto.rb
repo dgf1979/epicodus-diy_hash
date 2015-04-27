@@ -1,17 +1,20 @@
 ###
 #emulate a subset of Ruby's built-in Hash class
-class ErsatzHash
-  hash = []
+class MyHash
+
+  define_method(:initialize) do
+    @hash = []
+  end
 
   #emulate Hash#store
   define_method(:store) do |key, value|
     kp = KeyPair.new(key, value)
-    hash.push(kp)
+    @hash.push(kp)
   end
 
   #emulate Hash#fetch
   define_method(:fetch) do |key|
-    hash.each do |key_value_pair|
+    @hash.each do |key_value_pair|
       if key == key_value_pair.key
         return key_value_pair.value
       end
@@ -21,7 +24,7 @@ class ErsatzHash
 
   #emulate Hash#has_key?
   define_method(:has_key?) do |key|
-    hash.each do |key_value_pair|
+    @hash.each do |key_value_pair|
       if key == key_value_pair.key
         return true
       end
@@ -31,7 +34,7 @@ class ErsatzHash
 
   #emulate Hash#has_value?
   define_method(:has_value?) do |value|
-    hash.each do |key_value_pair|
+    @hash.each do |key_value_pair|
       if value == key_value_pair.value
         return true
       end
@@ -41,7 +44,7 @@ class ErsatzHash
 
   #emulate Hash#length
   define_method(:length) do
-    return hash.length()
+    return @hash.length()
   end
 
   ###
